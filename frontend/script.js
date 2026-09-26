@@ -118,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
       loadKnowledgeBase();
     } else if (tabId === 'chat-tab') {
       setTimeout(() => chatInput && chatInput.focus(), 150);
+    } else if (tabId === 'search-tab') {
+      setTimeout(() => searchQuery && searchQuery.focus(), 150);
     }
   }
 
