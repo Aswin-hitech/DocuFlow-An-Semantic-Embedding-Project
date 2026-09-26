@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DocuFlow - Simple Semantic Search Engine</title>
+  <title>DocuFlow - Semantic Search</title>
   <link rel="stylesheet" href="/static/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <!-- Markdown Renderer for clean reading -->
+  <!-- Markdown Renderer -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
@@ -25,10 +25,9 @@
           </svg>
         </div>
         <span class="apple-brand-title">DocuFlow</span>
-        <span class="apple-brand-pill">Search Engine</span>
       </div>
 
-      <!-- Center Segmented Pill Navigation: Core First, Advanced Grouped -->
+      <!-- Segmented Navigation: Core First, Advanced Grouped -->
       <nav class="apple-nav-segmented">
         <!-- 1. MAIN CORE: SEMANTIC SEARCH -->
         <button class="nav-segment-btn core-btn active" data-tab="search-tab">
@@ -36,50 +35,48 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          Search (Core)
+          Search
         </button>
 
         <span class="nav-divider"></span>
 
         <!-- 2. ADVANCED FEATURES -->
         <div class="advanced-nav-group">
-          <span class="advanced-tag-label">Advanced:</span>
-          
-          <button class="nav-segment-btn advanced-btn" data-tab="chat-tab" title="Talk with documents using AI">
+          <button class="nav-segment-btn advanced-btn" data-tab="chat-tab" title="AI Chatbot">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
             </svg>
-            AI Chatbot
+            AI Chat
             <span class="segment-badge" id="chat-source-badge">All</span>
           </button>
 
-          <button class="nav-segment-btn advanced-btn" data-tab="ingest-tab" title="Upload new files or scrape websites">
+          <button class="nav-segment-btn advanced-btn" data-tab="ingest-tab" title="Add Documents">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="17 8 12 3 7 8"></polyline>
               <line x1="12" y1="3" x2="12" y2="15"></line>
             </svg>
-            Add Files &amp; Web
+            Add Files
           </button>
 
-          <button class="nav-segment-btn advanced-btn" data-tab="explorer-tab" title="View all saved document pieces">
+          <button class="nav-segment-btn advanced-btn" data-tab="explorer-tab" title="Saved Library">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
             </svg>
-            Saved Files
+            Library
           </button>
         </div>
       </nav>
 
-      <!-- Right Simple Status Indicator -->
+      <!-- Status Indicator -->
       <div class="apple-header-status">
         <div class="apple-status-pill online" id="backend-status">
           <span class="status-dot"></span>
           <span id="backend-status-text">Ready</span>
         </div>
-        <div class="apple-stat-counter" title="Total saved document pieces">
-          <span>Saved:</span>
+        <div class="apple-stat-counter" title="Total saved chunks">
+          <span>Chunks:</span>
           <strong id="chunk-count-pill">0</strong>
         </div>
         <span id="model-pill" style="display: none;">AI Helper</span>
@@ -87,30 +84,13 @@
     </div>
   </header>
 
-  <!-- Hero Header Section (Focused on Semantic Search as Core) -->
+  <!-- Clean Minimal Hero -->
   <section class="apple-hero-section">
     <div class="apple-hero-container">
-      <span class="apple-hero-eyebrow">The Core Search Engine</span>
-      <h1 class="apple-hero-headline">Search by meaning. Not just words.</h1>
+      <h1 class="apple-hero-headline">Search by meaning.</h1>
       <p class="apple-hero-subheadline">
-        Type whatever you are thinking in simple words. Our search engine understands the real meaning behind your words and finds the exact lines from your saved papers.
+        Find exact passages in your documents using natural questions or concepts.
       </p>
-
-      <!-- Quick Core Features Row -->
-      <div class="core-highlights-row">
-        <div class="core-highlight-pill">
-          <span class="highlight-check">✓</span>
-          <span>Understands natural human questions</span>
-        </div>
-        <div class="core-highlight-pill">
-          <span class="highlight-check">✓</span>
-          <span>No need for exact keywords</span>
-        </div>
-        <div class="core-highlight-pill">
-          <span class="highlight-check">✓</span>
-          <span>Matches concept &amp; context instantly</span>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -122,13 +102,12 @@
     <!-- ======================================================== -->
     <section class="tab-content active" id="search-tab">
       
-      <!-- Primary Core Search Card -->
       <div class="apple-card core-search-card">
         
         <form id="search-form" class="search-form-apple">
-          <!-- Large Apple Search Bar -->
+          <!-- Search Bar -->
           <div class="apple-search-bar-large">
-            <svg class="search-icon-apple-lg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <svg class="search-icon-apple-lg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
@@ -136,27 +115,27 @@
               type="text" 
               id="search-query" 
               class="search-input-field-lg" 
-              placeholder="Ask a question or enter a topic (e.g. 'How do computers learn?' or 'Mars rovers')..." 
+              placeholder="Search anything across your documents..." 
               required
               autofocus
             >
             <button type="submit" class="apple-pill-btn primary search-submit-btn" id="search-btn">
-              Search by Meaning
+              Search
             </button>
           </div>
 
-          <!-- Simple Search Controls Bar -->
+          <!-- Search Controls -->
           <div class="apple-search-controls-bar">
             <div class="simple-control">
               <span class="control-icon">📂</span>
-              <label for="search-source-filter">Search inside:</label>
+              <label for="search-source-filter">Document:</label>
               <select id="search-source-filter" class="apple-select-clean">
-                <option value="all">🌟 All Documents &amp; Websites</option>
+                <option value="all">All Documents</option>
               </select>
             </div>
 
             <div class="simple-control">
-              <label for="top-k-slider">Show: <span id="top-k-val" class="bold-text">3</span> best answers</label>
+              <label for="top-k-slider">Results: <span id="top-k-val" class="bold-text">3</span></label>
               <input type="range" id="top-k-slider" min="1" max="10" value="3" class="apple-slider">
             </div>
 
@@ -165,20 +144,11 @@
               <span id="min-score-val">0.00</span>
             </div>
           </div>
-
-          <!-- Quick Example Chips (Village Friendly) -->
-          <div class="apple-example-chips">
-            <span class="chips-title">💡 Quick examples to test:</span>
-            <button type="button" class="chip chip-apple" data-query="How do computers learn patterns from data?">Computers learning patterns</button>
-            <button type="button" class="chip chip-apple" data-query="Robotic exploration missions on planet Mars">NASA Mars rovers</button>
-            <button type="button" class="chip chip-apple" data-query="Deep learning architectures and neural networks">Deep learning &amp; neural nets</button>
-            <button type="button" class="chip chip-apple" data-query="Planetary science and solar system structure">Solar system planets</button>
-          </div>
         </form>
 
         <!-- Search Meta Header -->
         <div class="results-header" id="results-meta" style="display: none;">
-          <span id="results-count-text" class="results-count-badge">Found matching pieces</span>
+          <span id="results-count-text" class="results-count-badge">Matching passages</span>
           <span id="results-latency-text" class="latency-badge-apple">Instant match</span>
         </div>
 
@@ -186,29 +156,10 @@
         <div id="search-results-list" class="apple-results-list">
           <div class="empty-state-simple" id="search-empty-state">
             <div class="empty-search-icon">🔍</div>
-            <h3 class="empty-search-title">Ready to Search</h3>
-            <p>Type any question or concept above, or click one of the quick example chips to see the semantic vector engine in action.</p>
+            <p>Enter any query or topic to search across your documents.</p>
           </div>
         </div>
 
-      </div>
-
-      <!-- Clean Apple Banner Connecting Core Search to Advanced Features -->
-      <div class="advanced-callout-banner">
-        <div class="callout-left">
-          <span class="callout-badge">⚡ Advanced Tools Available</span>
-          <p class="callout-text">
-            Want to have a conversation with your documents or add new files?
-          </p>
-        </div>
-        <div class="callout-actions">
-          <button type="button" class="apple-pill-btn secondary" onclick="switchTab('chat-tab')">
-            💬 Open AI Chatbot
-          </button>
-          <button type="button" class="apple-pill-btn secondary" onclick="switchTab('ingest-tab')">
-            📄 Add New Documents &amp; Websites
-          </button>
-        </div>
       </div>
 
     </section>
@@ -220,12 +171,10 @@
       
       <div class="section-title-row">
         <div>
-          <span class="section-eyebrow">⚡ Advanced Feature</span>
-          <h2 class="section-headline">AI Chatbot Assistant</h2>
-          <p class="section-subheadline">Talk with your documents like talking to a friend. Ask questions and get conversational explanations.</p>
+          <h2 class="section-headline">AI Chat</h2>
         </div>
         <button type="button" class="apple-pill-btn secondary" onclick="switchTab('search-tab')">
-          ← Back to Core Search
+          ← Back to Search
         </button>
       </div>
 
@@ -235,9 +184,9 @@
         <div class="apple-chat-toolbar">
           <div class="source-picker-group">
             <span class="picker-label-icon">📂</span>
-            <label for="chat-source-select" class="picker-label">Choose paper to talk with:</label>
+            <label for="chat-source-select" class="picker-label">Document:</label>
             <select id="chat-source-select" class="apple-select-clean">
-              <option value="all">🌟 Search across all my papers &amp; websites</option>
+              <option value="all">All Documents</option>
             </select>
             <button type="button" id="refresh-sources-btn" class="apple-icon-btn" title="Refresh files list">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -250,16 +199,12 @@
 
           <div class="chat-actions-right">
             <div class="simple-detail-toggle">
-              <label for="chat-top-k">Reading depth: <span id="chat-top-k-val" class="bold-text">3</span> passages</label>
+              <label for="chat-top-k">Context: <span id="chat-top-k-val" class="bold-text">3</span></label>
               <input type="range" id="chat-top-k" min="1" max="6" value="3" class="apple-slider">
             </div>
 
             <button type="button" id="clear-chat-btn" class="apple-pill-btn secondary" title="Start fresh conversation">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="3 6 5 6 21 6"></polyline>
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-              </svg>
-              Start New Chat
+              New Chat
             </button>
           </div>
         </div>
@@ -271,36 +216,15 @@
             <span class="notice-title" id="active-scope-title"></span>
             <span class="notice-sub" id="active-scope-chunks"></span>
           </div>
-          <button type="button" id="reset-scope-btn" class="notice-clear-btn">✕ Check All Files</button>
+          <button type="button" id="reset-scope-btn" class="notice-clear-btn">✕ Search All</button>
         </div>
 
         <!-- Chat Stream -->
         <div id="chat-messages" class="apple-chat-stream">
-          <!-- Empty State Greeting -->
+          <!-- Clean Empty State -->
           <div class="apple-chat-empty-state" id="chat-hero">
-            <div class="empty-icon-circle">👋</div>
-            <h2 class="empty-title">Hello! What would you like to know?</h2>
-            <p class="empty-desc">
-              Ask questions about your documents in simple words, and I will find the exact answers for you.
-            </p>
-
-            <div class="friendly-starters-box">
-              <span class="starters-label">💡 Click any question to try:</span>
-              <div class="starters-grid">
-                <button type="button" class="starter-chip prompt-chip" data-prompt="Please explain the main idea of the saved documents in simple, easy-to-understand words.">
-                  📝 "Explain the main idea in simple words"
-                </button>
-                <button type="button" class="prompt-chip starter-chip" data-prompt="Give me 3 key important points from the papers.">
-                  ⭐ "Give me 3 key points"
-                </button>
-                <button type="button" class="prompt-chip starter-chip" data-prompt="What are the differences between supervised and unsupervised learning? Explain like I am 12 years old.">
-                  🧠 "Explain machine learning simply"
-                </button>
-                <button type="button" class="prompt-chip starter-chip" data-prompt="What exploration missions have visited Mars according to the documents?">
-                  🚀 "What missions went to Mars?"
-                </button>
-              </div>
-            </div>
+            <div class="empty-icon-circle">💬</div>
+            <h2 class="empty-title">Ask anything about your documents</h2>
           </div>
         </div>
 
@@ -311,7 +235,7 @@
               <textarea 
                 id="chat-input" 
                 rows="1" 
-                placeholder="Ask your question here... (e.g. 'What does this paper say about health?')" 
+                placeholder="Ask a question..." 
                 required
               ></textarea>
               <button type="submit" id="chat-send-btn" class="apple-send-btn" title="Send Question">
@@ -322,10 +246,6 @@
               </button>
             </div>
           </form>
-          <div class="apple-input-footer-hints">
-            <span>💡 <strong>Tip:</strong> Press <strong>Enter</strong> to send. Press <strong>Shift + Enter</strong> for a new line.</span>
-            <span id="footer-llm-label">Connected to Smart Assistant</span>
-          </div>
         </div>
 
       </div>
@@ -338,26 +258,24 @@
       
       <div class="section-title-row">
         <div>
-          <span class="section-eyebrow">⚡ Advanced Feature</span>
-          <h2 class="section-headline">Add Documents &amp; Websites</h2>
-          <p class="section-subheadline">Upload files or paste webpage links to expand your searchable knowledge base.</p>
+          <h2 class="section-headline">Add Documents</h2>
         </div>
         <button type="button" class="apple-pill-btn secondary" onclick="switchTab('search-tab')">
-          ← Back to Core Search
+          ← Back to Search
         </button>
       </div>
 
-      <!-- Instant Celebration Banner -->
+      <!-- Celebration Banner -->
       <div id="ingest-action-banner" class="apple-celebration-card" style="display: none;">
         <div class="celebration-left">
           <div class="celebration-badge">✓</div>
           <div>
-            <h3 id="success-banner-title">Document Read &amp; Saved Successfully!</h3>
-            <p id="success-banner-desc">Ready to search and answer questions.</p>
+            <h3 id="success-banner-title">Document Added</h3>
+            <p id="success-banner-desc">Ready to search.</p>
           </div>
         </div>
         <button type="button" id="start-chat-with-ingested-btn" class="apple-pill-btn primary">
-          🔍 Search &amp; Ask About This Now →
+          Search This Now →
         </button>
       </div>
 
@@ -368,46 +286,44 @@
           <div class="card-header-simple">
             <span class="card-icon-big">📄</span>
             <div>
-              <h3 class="card-title-lg">Upload Your Document</h3>
-              <p class="card-sub-lg">Upload any document from your computer or phone.</p>
+              <h3 class="card-title-lg">Upload File</h3>
             </div>
           </div>
 
           <form id="file-upload-form">
             <div class="apple-drop-zone" id="drop-zone">
               <div class="upload-icon-circle">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="17 8 12 3 7 8"></polyline>
                   <line x1="12" y1="3" x2="12" y2="15"></line>
                 </svg>
               </div>
-              <h4 class="drop-headline">Choose a document file</h4>
-              <p class="drop-subline">Click to browse files or drag and drop it here</p>
-              <span class="drop-formats">Supports: PDF, Word (DOCX), Text files, CSV</span>
+              <h4 class="drop-headline">Choose a file</h4>
+              <p class="drop-subline">PDF, Word (DOCX), TXT, CSV</p>
               <input type="file" id="file-input" class="hidden-file-input" accept=".pdf,.docx,.doc,.txt,.md,.csv">
             </div>
 
             <!-- Selected File Preview -->
             <div id="selected-file-name" class="apple-selected-file-badge" style="display: none;"></div>
 
-            <!-- Optional Advanced Settings Accordion -->
+            <!-- Advanced Settings Accordion -->
             <details class="apple-details-accordion">
-              <summary class="accordion-summary">⚙️ Advanced settings (optional)</summary>
+              <summary class="accordion-summary">Settings</summary>
               <div class="accordion-content">
                 <div class="setting-row">
-                  <label>Section Size: <span id="file-chunk-size-val">500</span> letters</label>
+                  <label>Chunk Size: <span id="file-chunk-size-val">500</span></label>
                   <input type="range" id="file-chunk-size" min="100" max="2000" step="50" value="500" class="apple-slider">
                 </div>
                 <div class="setting-row">
-                  <label>Overlap: <span id="file-overlap-val">50</span> letters</label>
+                  <label>Overlap: <span id="file-overlap-val">50</span></label>
                   <input type="range" id="file-overlap" min="0" max="300" step="10" value="50" class="apple-slider">
                 </div>
               </div>
             </details>
 
             <button type="submit" class="apple-pill-btn primary full-width" id="upload-btn" disabled>
-              Save &amp; Index Document
+              Upload &amp; Index
             </button>
           </form>
         </div>
@@ -417,63 +333,60 @@
           <div class="card-header-simple">
             <span class="card-icon-big">🌐</span>
             <div>
-              <h3 class="card-title-lg">Read Any Website</h3>
-              <p class="card-sub-lg">Paste a website link, and we will extract and index it.</p>
+              <h3 class="card-title-lg">Web Page</h3>
             </div>
           </div>
 
           <form id="url-ingest-form">
             <div class="form-group-apple">
-              <label for="scrape-url">Paste Website Address (URL):</label>
+              <label for="scrape-url">URL:</label>
               <input 
                 type="url" 
                 id="scrape-url" 
                 class="apple-input-text" 
-                placeholder="https://en.wikipedia.org/wiki/Solar_System" 
+                placeholder="https://example.com/article" 
                 required
               >
-              <span class="input-helper-text">Example: Any news article, government website, or Wikipedia page.</span>
             </div>
 
             <details class="apple-details-accordion">
-              <summary class="accordion-summary">⚙️ Advanced settings (optional)</summary>
+              <summary class="accordion-summary">Settings</summary>
               <div class="accordion-content">
                 <div class="setting-row">
-                  <label>Section Size: <span id="url-chunk-size-val">500</span> letters</label>
+                  <label>Chunk Size: <span id="url-chunk-size-val">500</span></label>
                   <input type="range" id="url-chunk-size" min="100" max="2000" step="50" value="500" class="apple-slider">
                 </div>
                 <div class="setting-row">
-                  <label>Overlap: <span id="url-overlap-val">50</span> letters</label>
+                  <label>Overlap: <span id="url-overlap-val">50</span></label>
                   <input type="range" id="url-overlap" min="0" max="300" step="10" value="50" class="apple-slider">
                 </div>
               </div>
             </details>
 
             <button type="submit" class="apple-pill-btn primary full-width" id="scrape-btn">
-              Read &amp; Save Website
+              Index Webpage
             </button>
           </form>
         </div>
 
-        <!-- Box 3: Paste Direct Text -->
+        <!-- Box 3: Plain Text -->
         <div class="apple-card full-span-card">
           <div class="card-header-simple">
             <span class="card-icon-big">✍️</span>
             <div>
-              <h3 class="card-title-lg">Type or Paste Plain Text</h3>
-              <p class="card-sub-lg">If you have written notes or a message, paste it here.</p>
+              <h3 class="card-title-lg">Plain Text</h3>
             </div>
           </div>
 
           <form id="text-ingest-form">
             <div class="apple-form-row">
               <div class="form-group-apple flex-grow">
-                <label for="text-title">Give this a simple title:</label>
+                <label for="text-title">Title:</label>
                 <input 
                   type="text" 
                   id="text-title" 
                   class="apple-input-text" 
-                  placeholder="e.g. Village Notes, Crop Guide, Study Notes" 
+                  placeholder="Document Title" 
                   required
                 >
               </div>
@@ -484,18 +397,18 @@
             </div>
 
             <div class="form-group-apple">
-              <label for="raw-text-content">Write or paste your notes here:</label>
+              <label for="raw-text-content">Content:</label>
               <textarea 
                 id="raw-text-content" 
                 class="apple-textarea" 
                 rows="4" 
-                placeholder="Paste your text here..." 
+                placeholder="Type or paste text..." 
                 required
               ></textarea>
             </div>
 
             <button type="submit" class="apple-pill-btn primary" id="text-btn">
-              Save These Notes
+              Index Text
             </button>
           </form>
         </div>
@@ -510,32 +423,30 @@
       
       <div class="section-title-row">
         <div>
-          <span class="section-eyebrow">⚡ Advanced Feature</span>
-          <h2 class="section-headline">Saved Files &amp; Storage Library</h2>
-          <p class="section-subheadline">Review all your stored document paragraphs, sources, and vector storage.</p>
+          <h2 class="section-headline">Library</h2>
         </div>
         <button type="button" class="apple-pill-btn secondary" onclick="switchTab('search-tab')">
-          ← Back to Core Search
+          ← Back to Search
         </button>
       </div>
 
-      <!-- Simple Summary Stats Cards -->
+      <!-- Summary Stats -->
       <div class="apple-summary-stats-grid">
         <div class="summary-stat-box">
           <span class="stat-number" id="exp-sources">0</span>
-          <span class="stat-label">Saved Files &amp; Websites</span>
+          <span class="stat-label">Documents</span>
         </div>
         <div class="summary-stat-box">
           <span class="stat-number" id="exp-total-chunks">0</span>
-          <span class="stat-label">Total Paragraph Pieces</span>
+          <span class="stat-label">Chunks</span>
         </div>
         <div class="summary-stat-box">
           <span class="stat-number" id="exp-dimension">384</span>
-          <span class="stat-label">Vector Dimension Detail</span>
+          <span class="stat-label">Dimension</span>
         </div>
         <div class="summary-stat-box">
           <span class="stat-number" id="exp-size">0 KB</span>
-          <span class="stat-label">Storage Used</span>
+          <span class="stat-label">Storage</span>
         </div>
       </div>
 
@@ -543,14 +454,13 @@
       <div class="apple-card" style="margin-bottom: 1.5rem;">
         <div class="card-header-row">
           <div>
-            <h3 class="card-title-lg">All Saved Papers &amp; Websites</h3>
-            <p class="card-sub-lg">Search or ask questions about any document individually.</p>
+            <h3 class="card-title-lg">Indexed Documents</h3>
           </div>
-          <button type="button" class="apple-pill-btn secondary" id="refresh-sources-table-btn">Refresh List</button>
+          <button type="button" class="apple-pill-btn secondary" id="refresh-sources-table-btn">Refresh</button>
         </div>
 
         <div class="sources-list-grid" id="sources-summary-container">
-          <div class="loading-state-simple">Loading your files...</div>
+          <div class="loading-state-simple">Loading documents...</div>
         </div>
       </div>
 
@@ -558,12 +468,11 @@
       <div class="apple-card">
         <div class="card-header-row">
           <div>
-            <h3 class="card-title-lg">Document Paragraphs Inspector</h3>
-            <p class="card-sub-lg">Detailed inspection of every indexed vector chunk.</p>
+            <h3 class="card-title-lg">Chunks Inspector</h3>
           </div>
           <div class="btn-group-row">
             <button type="button" class="apple-pill-btn secondary" id="refresh-docs-btn">Refresh</button>
-            <button type="button" class="apple-pill-btn danger" id="clear-docs-btn">Clear All Files</button>
+            <button type="button" class="apple-pill-btn danger" id="clear-docs-btn">Clear All</button>
           </div>
         </div>
 
@@ -571,15 +480,15 @@
           <table class="data-table-apple">
             <thead>
               <tr>
-                <th style="width: 15%;">Piece ID</th>
-                <th style="width: 55%;">Text Preview</th>
-                <th style="width: 20%;">Origin Paper</th>
+                <th style="width: 20%;">ID</th>
+                <th style="width: 50%;">Text</th>
+                <th style="width: 20%;">Document</th>
                 <th style="width: 10%;">Size</th>
               </tr>
             </thead>
             <tbody id="chunks-table-body">
               <tr>
-                <td colspan="4" class="text-center-simple">Loading saved paragraphs...</td>
+                <td colspan="4" class="text-center-simple">Loading chunks...</td>
               </tr>
             </tbody>
           </table>
@@ -589,28 +498,28 @@
 
   </main>
 
-  <!-- Apple-Style Inspection Modal -->
+  <!-- Inspection Modal -->
   <div id="chunk-modal" class="apple-modal">
     <div class="apple-modal-box">
       <div class="modal-top-bar">
-        <h3 id="modal-title" class="modal-heading">Original Paragraph Passage</h3>
+        <h3 id="modal-title" class="modal-heading">Passage</h3>
         <button type="button" class="modal-close-x" id="modal-close-btn">&times;</button>
       </div>
       <div class="modal-inner-content">
         <div class="modal-info-row">
-          <span>From Paper: <strong id="modal-source">-</strong></span>
-          <span>Match Score: <strong id="modal-score" style="color: #0071e3;">-</strong></span>
+          <span>Document: <strong id="modal-source">-</strong></span>
+          <span>Score: <strong id="modal-score" style="color: #0071e3;">-</strong></span>
         </div>
         <div class="modal-quote-box" id="modal-text"></div>
       </div>
       <div class="modal-bottom-actions">
-        <button type="button" class="apple-pill-btn secondary" id="modal-copy-btn">Copy Text</button>
-        <button type="button" class="apple-pill-btn primary" id="modal-chat-btn">💬 Ask Questions About This</button>
+        <button type="button" class="apple-pill-btn secondary" id="modal-copy-btn">Copy</button>
+        <button type="button" class="apple-pill-btn primary" id="modal-chat-btn">💬 Chat</button>
       </div>
     </div>
   </div>
 
-  <!-- Notification Toast (Apple Pill) -->
+  <!-- Notification Toast -->
   <div id="toast" class="apple-toast-pill"></div>
 
   <script src="/static/script.js"></script>
