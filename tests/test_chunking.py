@@ -1,5 +1,5 @@
 import pytest
-from core.chunking import chunk_text, chunk_text_with_metadata, chunk_by_paragraphs
+from core.chunking import chunk_text, chunk_text_with_metadata, chunk_by_paragraphs, BoundaryAwareChunker
 
 
 class TestChunkText:
@@ -38,6 +38,26 @@ class TestChunkText:
         with pytest.raises(ValueError, match="overlap must be smaller than chunk_size"):
             chunk_text("Sample", chunk_size=50, overlap=50)
 
+    def test_boundary_aware_never_cuts_words(self):
+        text = "The umpire considered that the bowler derived an unfair advantage during the delivery."
+        chunks = chunk_text(text, chunk_size=40, overlap=10)
+        assert len(chunks) > 1
+        for chunk in chunks:
+            # Verify words are not cut into non-words like 'advan' or 'bowle'
+            words = chunk.split()
+            for w in words:
+                # Every word in the chunk must exist as an intact word in the source text
+                clean_w = w.strip(".,;:!?")
+                assert clean_w in text.split() or clean_w in [t.strip(".,;:!?") for t in text.split()]
+
+    def test_sentence_boundary_preservation(self):
+        text = "Machine learning is powerful. Deep learning extends neural networks. RAG retrieval grounds facts."
+        chunks = chunk_text(text, chunk_size=50, overlap=10)
+        assert len(chunks) >= 2
+        # Check that sentences remain intact and end with proper punctuation
+        for chunk in chunks:
+            assert chunk.endswith(".")
+
 
 class TestChunkTextWithMetadata:
     def test_metadata_structure(self):
@@ -58,6 +78,21 @@ class TestChunkTextWithMetadata:
             assert item["metadata"]["source"] == "test_source.txt"
             assert item["metadata"]["chunk_index"] == i
             assert item["metadata"]["total_chunks"] == len(enriched)
+
+    def test_exact_character_offsets(self):
+        text = "Alpha bravo charlie. Delta echo foxtrot. Golf hotel india."
+        enriched = chunk_text_with_metadata(
+            text,
+            chunk_size=30,
+            overlap=5,
+            doc_id="doc_2",
+            source="test_offsets.txt"
+        )
+        for item in enriched:
+            s = item["metadata"]["char_start"]
+            e = item["metadata"]["char_end"]
+            expected_text = item["text"]
+            assert text[s:e] == expected_text
 
 
 class TestChunkByParagraphs:
